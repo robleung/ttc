@@ -31,7 +31,7 @@ const displayController = (() => {
       ? (gamearr.arr[pos] = "X")
       : console.log("space occupied");
   };
-  const render = () => {
+  const renderBoard = () => {
     let content = document.querySelector(".content");
     while (content.firstChild) {
       content.removeChild(content.firstChild);
@@ -42,13 +42,46 @@ const displayController = (() => {
       div.id = "box-" + i;
       div.addEventListener("click", boxClick);
       div.innerText = gamearr.arr[i];
-      content.appendChild(div);
+      content.append(div);
     }
   };
-  return { render, boxClick };
+  const render = () => {
+    let info = document.querySelector(".info");
+    let p1 = document.createElement("div");
+    let p1Label = document.createElement("label");
+    p1Label.innerText = "Enter a name for Player 1 - X";
+    let p1Input = document.createElement("input");
+    p1Input.type = "text";
+    p1.append(p1Label);
+    p1.append(p1Input);
+    let p2 = document.createElement("div");
+    let p2Label = document.createElement("label");
+    p2Label.innerText = "Enter a name for Player 2 - O";
+    let p2Input = document.createElement("input");
+    p2Input.type = "text";
+    p2.append(p2Label);
+    p2.append(p2Input);
+    let start = document.createElement("button");
+    start.innerText = "Submit / Start";
+    info.append(p1, p2, start);
+    renderBoard();
+  };
+  return { render, renderBoard, boxClick };
 })();
 
-const player = (name) => {
-  return { name };
+const player = (name, marker) => {
+  return { name, marker };
 };
-const gameplayController = (() => {})();
+const gameplayController = (() => {
+  const loadPlayers = () => {
+    // prompt for p1, prompt for p2
+    // assign markers
+  };
+  const start = () => {
+    displayController.render();
+    gameplayController.loadPlayers();
+  };
+  return { start, loadPlayers };
+})();
+
+gameplayController.start();
