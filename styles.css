@@ -151,6 +151,10 @@ h1 {
   margin-right: 10px;
 }
 
+.buttons > button:first-child {
+  margin-right: 5px;
+}
+
 .content {
   width: 400px;
   height: 400px;
